@@ -14,9 +14,12 @@ import {Effect, Actions, ofType} from '@ngrx/effects';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
 
 import {RouterNavigationAction, ROUTER_NAVIGATION} from '@ngrx/router-store';
 import {Observable} from 'rxjs/Observable';
+import {QueryCondition, QueryConditionAction} from './query-condition';
 
 
 interface RouterStateUrl {
@@ -53,15 +56,31 @@ export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
 
 @Injectable()
 export class MyEffect {
-  @Effect({dispatch: false})
-  navigate$: Observable<any> = this.actions$
+  // @Effect({dispatch: false})
+  @Effect()
+  translateUrl$: Observable<any> = this.actions$
     .ofType<RouterNavigationAction<RouterStateUrl>>(ROUTER_NAVIGATION)
     .map((action) => action.payload.routerState)
-    .do(routerState => {
+    .switchMap(routerState => {
       console.log('routerState is', routerState);
       const {url, params, queryParams} = routerState;
       // const  = payload;
-      console.log('url', url, 'params', params, 'queryParams', queryParams);
+      console.log('url', url, 'params', params);
+      console.log('queryParams', queryParams);
+      const newState: QueryCondition = {
+        accountId: params.accountId,
+        dateRange: {
+          startDate: new Date(queryParams.startDate),
+          endDate: new Date(queryParams.endDate),
+        },
+        segmentOptions: queryParams.segmentOptions,
+        sortKey: queryParams.sortKey,
+        filter: queryParams.filter,
+      };
+      const action = new QueryConditionAction(newState);
+      console.log('action to be dispatched', action);
+      return Observable.of(action);
+
     });
 
   constructor(private actions$: Actions,

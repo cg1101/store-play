@@ -21,7 +21,7 @@ export class AppComponent {
   constructor(private store: Store<AppState>) {
     this.queryCondition$ = store.select(createFeatureSelector('queryCondition'));
 
-    this.queryCondition$.subscribe(data => console.log('queryCondition->', data));
+    // this.queryCondition$.subscribe(data => console.log('queryCondition->', data));
   }
 
   back() {

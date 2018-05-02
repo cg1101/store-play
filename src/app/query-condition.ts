@@ -41,6 +41,10 @@ export class QueryConditionAction implements Action {
 
 // reducer
 export function queryConditionReducer(state: QueryCondition = initialState, action: QueryConditionAction): QueryCondition {
-  return Object.assign({}, action.payload);
+  // console.log('queryConditionReducer is working');
+  const isInterested = action.type === '[QueryCondition] Update';
+  // console.log(`this is ${isInterested ? ' ' : 'not '}my interested event:`, action);
+  const newState = isInterested ? Object.assign({}, action.payload) : state;
+  // console.log('current state:', state, 'new state:', newState);
+  return newState;
 }
-
