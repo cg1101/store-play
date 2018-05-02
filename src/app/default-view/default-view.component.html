@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    ngStore play
+  </h1>
+
+  <a routerLinkActive="active" routerLink="/accounts/1234">1234</a>
+  <a routerLinkActive="active" routerLink="/accounts/5678">5678</a>
+
+  <hr>
+  <button (click)="increment()">Increment</button>
+  <div>Current Count: {{ count$ | async }}</div>
+  <button (click)="decrement()">Decrement</button>
+
+  <button (click)="reset()">Reset Counter</button>
+</div>
