@@ -34,7 +34,9 @@ export const initialState: QueryCondition = {
 // action
 export class QueryConditionAction implements Action {
   readonly type = '[QueryCondition] Update';
-  constructor(public payload: QueryCondition) {}
+
+  constructor(public payload: QueryCondition) {
+  }
 }
 
 // reducer

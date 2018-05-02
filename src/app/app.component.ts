@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
-
-import {Store} from '@ngrx/store';
+import {Store, createFeatureSelector, select} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/filter';
 
 import * as RouterActions from './navigation';
 import {QueryCondition} from './query-condition';
-import {Observable} from 'rxjs/Observable';
-
-import {createFeatureSelector} from '@ngrx/store';
 
 export interface AppState {
   count: number;
@@ -21,7 +19,9 @@ export class AppComponent {
   queryCondition$: Observable<QueryCondition>;
 
   constructor(private store: Store<AppState>) {
-    this.queryCondition$ = this.store.select(createFeatureSelector('queryCondition'));
+    this.queryCondition$ = store.select(createFeatureSelector('queryCondition'));
+
+    this.queryCondition$.subscribe(data => console.log('queryCondition->', data));
   }
 
   back() {
@@ -43,7 +43,7 @@ export class AppComponent {
       query: {
         startDate: '2018-01-10T13:00:03',
         endDate: '2018-10-31T10:00:00',
-        segmentOptions: ['gender:male','age:13-40'],
+        segmentOptions: ['gender:male', 'age:13-40'],
         sortKey: 'cpr',
         filter: 'status:3',
       },

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { INCREMENT, DECREMENT, RESET } from '../counter';
+import {Component} from '@angular/core';
+import {Store, select} from '@ngrx/store';
+import {Observable} from 'rxjs';
 
-import { AppState } from '../app.component';
+import {INCREMENT, DECREMENT, RESET} from '../counter';
+import {AppState} from '../app.component';
 
 @Component({
   selector: 'app-default-view',
@@ -19,15 +19,15 @@ export class DefaultViewComponent {
   }
 
   increment() {
-    this.store.dispatch({ type: INCREMENT });
+    this.store.dispatch({type: INCREMENT});
   }
 
   decrement() {
-    this.store.dispatch({ type: DECREMENT });
+    this.store.dispatch({type: DECREMENT});
   }
 
   reset() {
-    this.store.dispatch({ type: RESET });
+    this.store.dispatch({type: RESET});
   }
 
 }

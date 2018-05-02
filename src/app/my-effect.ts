@@ -1,6 +1,5 @@
-
-import { StoreModule, ActionReducerMap } from '@ngrx/store';
-import { Params, RouterStateSnapshot } from '@angular/router';
+import {StoreModule, ActionReducerMap} from '@ngrx/store';
+import {Params, RouterStateSnapshot} from '@angular/router';
 import {
   StoreRouterConnectingModule,
   routerReducer,
@@ -8,15 +7,15 @@ import {
   RouterStateSerializer,
 } from '@ngrx/router-store';
 
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { Effect, Actions, ofType } from '@ngrx/effects';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
+import {Effect, Actions, ofType} from '@ngrx/effects';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import { RouterNavigationAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
+import {RouterNavigationAction, ROUTER_NAVIGATION} from '@ngrx/router-store';
 import {Observable} from 'rxjs/Observable';
 
 
@@ -42,12 +41,12 @@ export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
       route = route.firstChild;
     }
 
-    const { url, root: { queryParams } } = routerState;
-    const { params } = route;
+    const {url, root: {queryParams}} = routerState;
+    const {params} = route;
 
     // Only return an object including the URL, params and query params
     // instead of the entire snapshot
-    return { url, params, queryParams };
+    return {url, params, queryParams};
   }
 }
 
@@ -60,13 +59,13 @@ export class MyEffect {
     .map((action) => action.payload.routerState)
     .do(routerState => {
       console.log('routerState is', routerState);
-      const { url, params, queryParams} = routerState;
+      const {url, params, queryParams} = routerState;
       // const  = payload;
       console.log('url', url, 'params', params, 'queryParams', queryParams);
     });
-  constructor(
-    private actions$: Actions,
-    private router: Router,
-    private location: Location
-  ) {}
+
+  constructor(private actions$: Actions,
+              private router: Router,
+              private location: Location) {
+  }
 }

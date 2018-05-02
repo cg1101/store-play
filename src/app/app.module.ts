@@ -1,18 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {StoreModule} from '@ngrx/store';
 import {StoreRouterConnectingModule, routerReducer, RouterStateSerializer} from '@ngrx/router-store';
-import { EffectsModule } from '@ngrx/effects';
+import {EffectsModule} from '@ngrx/effects';
 
 
 import {AppRoutingModule} from './app-routing.module';
-import { counterReducer } from './counter';
+import {counterReducer} from './counter';
 
 import {RouterEffects} from './navigation-effects';
 
-import { AppComponent } from './app.component';
-import { DefaultViewComponent } from './default-view/default-view.component';
-import { CampaignListComponent } from './campaign-list/campaign-list.component';
+import {AppComponent} from './app.component';
+import {DefaultViewComponent} from './default-view/default-view.component';
+import {CampaignListComponent} from './campaign-list/campaign-list.component';
 
 import {MyEffect, reducers, CustomSerializer} from './my-effect';
 import {queryConditionReducer} from './query-condition';
@@ -47,4 +47,5 @@ import {queryConditionReducer} from './query-condition';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
