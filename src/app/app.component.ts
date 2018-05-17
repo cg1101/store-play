@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Store, createFeatureSelector, select} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/filter';
+import {Observable} from 'rxjs';
+
 
 import * as RouterActions from './navigation';
 import {QueryCondition} from './query-condition';

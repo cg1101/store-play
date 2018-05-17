@@ -1,3 +1,7 @@
+
+import {of as observableOf, Observable} from 'rxjs';
+
+import {switchMap, map} from 'rxjs/operators';
 import {StoreModule, ActionReducerMap} from '@ngrx/store';
 import {Params, RouterStateSnapshot} from '@angular/router';
 import {
@@ -12,13 +16,12 @@ import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Effect, Actions, ofType} from '@ngrx/effects';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/observable/of';
+
+
+
+
 
 import {RouterNavigationAction, ROUTER_NAVIGATION} from '@ngrx/router-store';
-import {Observable} from 'rxjs/Observable';
 import {QueryCondition, QueryConditionAction} from './query-condition';
 
 
@@ -59,9 +62,9 @@ export class MyEffect {
   // @Effect({dispatch: false})
   @Effect()
   translateUrl$: Observable<any> = this.actions$
-    .ofType<RouterNavigationAction<RouterStateUrl>>(ROUTER_NAVIGATION)
-    .map((action) => action.payload.routerState)
-    .switchMap(routerState => {
+    .ofType<RouterNavigationAction<RouterStateUrl>>(ROUTER_NAVIGATION).pipe(
+    map((action) => action.payload.routerState),
+    switchMap(routerState => {
       console.log('routerState is', routerState);
       const {url, params, queryParams} = routerState;
       // const  = payload;
@@ -79,9 +82,9 @@ export class MyEffect {
       };
       const action = new QueryConditionAction(newState);
       console.log('action to be dispatched', action);
-      return Observable.of(action);
+      return observableOf(action);
 
-    });
+    }),);
 
   constructor(private actions$: Actions,
               private router: Router,
